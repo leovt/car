@@ -1,0 +1,16 @@
+.wall {
+  stroke: black;
+  stroke-width: 0.1;
+  fill: darkgrey;
+}
+
+.collide {
+  stroke: red;
+  stroke-width: 0.1;
+}
+
+.paint {
+  stroke: white;
+  stroke-width: 0.12;
+  fill: none;
+}
