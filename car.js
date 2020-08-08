@@ -28,6 +28,18 @@ Array.from(document.getElementById('obstacles').children).forEach(
       rect:rect});
 });
 
+// collect the information of all targets in the svg into an array
+let targets=[];
+Array.from(document.getElementById('targets').children).forEach(
+  function(rect) {
+    targets.push({
+      x0:rect.x.baseVal.value,
+      y0:rect.y.baseVal.value,
+      x1:rect.x.baseVal.value+rect.width.baseVal.value,
+      y1:rect.y.baseVal.value+rect.height.baseVal.value,
+      rect:rect});
+});
+
 let car=document.getElementById('car');
 let frontwheel=document.getElementById('frontwheel');
 
@@ -130,6 +142,12 @@ function checkCollission(){
 
     // the car collides with the obstacle
     obstacle.rect.classList.add("collide");
+  });
+  targets.forEach(function(target) {
+    target.rect.classList.remove("hit");
+    if (target.x0 <= x_min && x_max <= target.x1 &&
+        target.y0 <= y_min && y_max <= target.y1)
+      {target.rect.classList.add('hit');}
   });
 }
 

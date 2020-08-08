@@ -14,3 +14,23 @@
   stroke-width: 0.12;
   fill: none;
 }
+
+#diagonalHatch rect {
+  fill:lightgreen;
+}
+
+#diagonalHatch line {
+  stroke:green;
+  stroke-width:0.2
+}
+
+.target {
+  fill: url(#diagonalHatch);
+  opacity: 0.5;
+  stroke:green;
+  stroke-width:0.1
+}
+
+.target.hit {
+  opacity: 1;
+}
