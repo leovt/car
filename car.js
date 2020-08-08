@@ -142,7 +142,8 @@ function checkCollission(){
 
     // the car collides with the obstacle
     obstacle.rect.classList.add("collide");
-  });
+    document.getElementById('lose').setAttribute('style', 'display: block');
+});
   targets.forEach(function(target) {
     target.rect.classList.remove("hit");
     if (target.x0 <= x_min && x_max <= target.x1 &&
