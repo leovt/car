@@ -34,3 +34,22 @@
 .target.hit {
   opacity: 1;
 }
+
+#win {
+  display: none;
+}
+
+#win rect {
+  stroke-width: 0.1;
+  stroke: black;
+  fill: lightgreen;
+ }
+
+ a:link, a:visited {
+   cursor: pointer;
+ }
+
+a text {
+   fill: blue;
+   text-decoration: underline;
+}

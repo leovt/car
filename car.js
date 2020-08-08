@@ -147,7 +147,10 @@ function checkCollission(){
     target.rect.classList.remove("hit");
     if (target.x0 <= x_min && x_max <= target.x1 &&
         target.y0 <= y_min && y_max <= target.y1)
-      {target.rect.classList.add('hit');}
+    {
+      target.rect.classList.add('hit');
+      document.getElementById('win').setAttribute('style', 'display: block');
+    }
   });
 }
 

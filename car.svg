@@ -55,6 +55,13 @@
        <use xlink:href='#frontwheel' transform='translate(0,  0.71)' />
        <path d='' stroke='red' stroke-width='0.1' fill='none' id='debug2'/>
      </g>
+     <g id="win">
+       <rect x='20%' width='60%' y='40%' height='20%'/>
+       <text x="50%" y="50%" text-anchor="middle" font-size='20%'>You Win!</text>
+       <a href="car.svg">
+         <text x="50%" y="57%" text-anchor="middle" font-size='12%'>Reload Level</text>
+       </a>
+     </g>
      <script xlink:href='car.js'>
      </script>
      <path d='' stroke='red' stroke-width='0.1' fill='none' id='debug'/>
