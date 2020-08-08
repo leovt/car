@@ -15,6 +15,10 @@
   fill: none;
 }
 
+.dashed {
+  stroke-dasharray: 0.6 1;
+}
+
 #diagonalHatch rect {
   fill:lightgreen;
 }

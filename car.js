@@ -183,11 +183,11 @@ function onMouseDown(evt) {
 }
 
 function onKeyDown(evt) {
-  if (evt.key === 'ArrowUp'){
+  if (evt.key === 'ArrowUp' || evt.key === 'W' || evt.key === 'w'){
     distance += 0.1;
     moveCar();
   }
-  else if (evt.key === 'ArrowDown'){
+  else if (evt.key === 'ArrowDown' || evt.key === 'S' || evt.key === 's'){
     distance -= 0.1;
     moveCar();
   }
