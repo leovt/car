@@ -7,7 +7,12 @@
      </defs>
      <rect x='5' y='5' width='30' height='30' fill='lightgrey'></rect>
      <path d='M29,6 34,6 34,8.5 29,8.5 34,8.5, 34,11 29,11 34,11 34,13.5 29,13.5 34,13.5 34,16 29,16' class='paint' />
-     <g id="obstacles"></g>
+     <g id="obstacles">
+       <rect class="wall" x="5" y="4" width="31" height="1"/>
+       <rect class="wall" x="35" y="5" width="1" height="31"/>
+       <rect class="wall" x="4" y="35" width="31" height="1"/>
+       <rect class="wall" x="4" y="4" width="1" height="31"/>
+     </g>
      <g id="car" transform='translate(20,20)rotate(40)'>
        <rect x='-3.30' y='-0.88' width='4.05' height='1.76' fill='pink'></rect>
        <rect x='-0.90' y='-0.70' width='0.50' height='1.40' fill='lightblue'></rect>

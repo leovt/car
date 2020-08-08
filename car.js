@@ -15,27 +15,21 @@ let w=-90*deg;
 let a=0;
 let lastY=null;
 let distance=0;
+
+// collect the information of all obstacles in the svg into an array
 let obstacles=[];
-
-function addObstacle(x0, y0, x1, y1, classNames, id){
-  let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  rect.setAttribute('class', classNames);
-  rect.setAttribute('id', id);
-  rect.setAttribute('x', x0);
-  rect.setAttribute('y', y0);
-  rect.setAttribute('width', x1-x0);
-  rect.setAttribute('height', y1-y0);
-  document.getElementById('obstacles').appendChild(rect);
-  obstacles.push({x0:x0, y0:y0, x1:x1, y1:y1, id:id});
-}
-
-addObstacle(1,4,20,5,'wall','wall1');
-addObstacle(15,15,25,25,'wall','wall2');
+Array.from(document.getElementById('obstacles').children).forEach(
+  function(rect) {
+    obstacles.push({
+      x0:rect.x.baseVal.value,
+      y0:rect.y.baseVal.value,
+      x1:rect.x.baseVal.value+rect.width.baseVal.value,
+      y1:rect.y.baseVal.value+rect.height.baseVal.value,
+      rect:rect});
+});
 
 let car=document.getElementById('car');
 let frontwheel=document.getElementById('frontwheel');
-
-
 
 function moveCar() {
   while (Math.abs(distance) >= h) {
@@ -95,8 +89,7 @@ function checkCollission(){
   //document.getElementById('debug2').setAttribute('d', '');
 
   obstacles.forEach(function(obstacle) {
-    let rect = document.getElementById(obstacle.id);
-    rect.classList.remove("collide");
+    obstacle.rect.classList.remove("collide");
 
     // if bounding box of car does not intersect, no further testing
     if (obstacle.x1 < x_min || x_max < obstacle.x0) return;
@@ -136,7 +129,7 @@ function checkCollission(){
     if (v_min > 0.88 || v_max < -0.88) return;
 
     // the car collides with the obstacle
-    rect.classList.add("collide");
+    obstacle.rect.classList.add("collide");
   });
 }
 
