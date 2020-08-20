@@ -75,3 +75,9 @@ a text {
 	opacity: 0.4;
 	stroke-dasharray: 0.2 0.31;
 }
+
+.cone {
+  stroke: darkorange;
+  fill: orange;
+  stroke-width: 0.1;
+}
