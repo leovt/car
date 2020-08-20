@@ -61,6 +61,7 @@ function moveCar() {
   }
   car.setAttribute('transform', `translate(${x},${y})rotate(${w/deg})`);
   frontwheel.setAttribute('transform', `rotate(${a/deg})`);
+  drawTrace();
 }
 
 moveCar();
@@ -153,6 +154,31 @@ function checkCollission(){
       document.getElementById('win').setAttribute('style', 'display: block');
     }
   });
+}
+
+function drawTrace() {
+  let d='0,0';
+  let w=0;
+  let x=0;
+  let y=0;
+  let i;
+  for(i=0; i<100; i++) {
+    w -= Math.asin(Math.sin(a) * h / wheelBase);
+    x -= h*Math.cos(w+a);
+    y -= h*Math.sin(w+a);
+    d = `${x},${y} ` + d;
+  }
+  d='M' + d;
+  x=0;
+  y=0;
+  w=0;
+  for(i=0; i<100; i++) {
+    x += h*Math.cos(w+a);
+    y += h*Math.sin(w+a);
+    w += Math.asin(Math.sin(a) * h / wheelBase);
+    d = d + ` ${x},${y}`;
+  }
+  document.getElementById('trace').setAttribute('d', d);
 }
 
 function onMouseMove(evt) {
