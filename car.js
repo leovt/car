@@ -15,6 +15,7 @@ let w=-90*deg;
 let a=0;
 let lastY=null;
 let distance=0;
+let car_enable=true;
 
 // collect the information of all obstacles in the svg into an array
 let obstacles=[];
@@ -44,6 +45,9 @@ let car=document.getElementById('car');
 let frontwheel=document.getElementById('frontwheel');
 
 function moveCar() {
+  if (!car_enable) {
+    return;
+  }
   while (Math.abs(distance) >= h) {
     if (distance > 0) {
       x += h*Math.cos(w+a);
@@ -142,6 +146,7 @@ function checkCollission(){
     if (v_min > 0.88 || v_max < -0.88) return;
 
     // the car collides with the obstacle
+    car_enable = false;
     obstacle.rect.classList.add("collide");
     document.getElementById('lose').setAttribute('style', 'display: block');
 });
@@ -150,6 +155,7 @@ function checkCollission(){
     if (target.x0 <= x_min && x_max <= target.x1 &&
         target.y0 <= y_min && y_max <= target.y1)
     {
+      car_enable = false;
       target.rect.classList.add('hit');
       document.getElementById('win').setAttribute('style', 'display: block');
     }
