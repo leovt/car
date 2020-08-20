@@ -157,28 +157,69 @@ function checkCollission(){
 }
 
 function drawTrace() {
-  let d='0,0';
+  let d1='0,0';
+  let d2='0,0';
+  let d3='0,0';
+  let d4='0,0';
   let w=0;
   let x=0;
   let y=0;
-  let i;
-  for(i=0; i<100; i++) {
-    w -= Math.asin(Math.sin(a) * h / wheelBase);
+  let i,x1,x2,x3,x4,y1,y2,y3,y4;
+  let dw = Math.asin(Math.sin(a) * h / wheelBase);
+  for(i=0; i<60; i++) {
+    w -= dw;
     x -= h*Math.cos(w+a);
     y -= h*Math.sin(w+a);
-    d = `${x},${y} ` + d;
+
+    let cos=Math.cos(w);
+    let sin=Math.sin(w);
+
+    x1 = x - 0.71*sin;
+    y1 = y + 0.71*cos;
+    x2 = x + 0.71*sin;
+    y2 = y - 0.71*cos;
+
+    x3 = x1 - 2.55*cos;
+    y3 = y1 - 2.55*sin;
+    x4 = x2 - 2.55*cos;
+    y4 = y2 - 2.55*sin;
+
+    d1 = `${x1},${y1} ` + d1;
+    d2 = `${x2},${y2} ` + d2;
+    d3 = `${x3},${y3} ` + d3;
+    d4 = `${x4},${y4} ` + d4;
   }
-  d='M' + d;
+  d1='M' + d1;
+  d2='M' + d2;
+  d3='M' + d3;
+  d4='M' + d4;
   x=0;
   y=0;
   w=0;
-  for(i=0; i<100; i++) {
+  for(i=0; i<60; i++) {
     x += h*Math.cos(w+a);
     y += h*Math.sin(w+a);
-    w += Math.asin(Math.sin(a) * h / wheelBase);
-    d = d + ` ${x},${y}`;
+    w += dw;
+
+    let cos=Math.cos(w);
+    let sin=Math.sin(w);
+
+    x1 = x - 0.71*sin;
+    y1 = y + 0.71*cos;
+    x2 = x + 0.71*sin;
+    y2 = y - 0.71*cos;
+
+    x3 = x1 - 2.55*cos;
+    y3 = y1 - 2.55*sin;
+    x4 = x2 - 2.55*cos;
+    y4 = y2 - 2.55*sin;
+
+    d1 = d1 + ` ${x1},${y1}`;
+    d2 = d2 + ` ${x2},${y2}`;
+    d3 = d3 + ` ${x3},${y3}`;
+    d4 = d4 + ` ${x4},${y4}`;
   }
-  document.getElementById('trace').setAttribute('d', d);
+  document.getElementById('trace').setAttribute('d', d1+d2+d3+d4);
 }
 
 function onMouseMove(evt) {
