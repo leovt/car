@@ -228,9 +228,9 @@ function drawTrace() {
   document.getElementById('trace').setAttribute('d', d1+d2+d3+d4);
 }
 
-function onMouseMove(evt) {
+function handleMove(clientX, clientY, moveY) {
   let client = document.documentElement.getBoundingClientRect();
-  let xRatio = (evt.clientX - client.left) / client.width;
+  let xRatio = (clientX - client.left) / client.width;
 
   if (xRatio < 0.3) {
     a = -maxDeflection;}
@@ -241,11 +241,15 @@ function onMouseMove(evt) {
   else {
     a = maxDeflection;}
 
-  if (evt.buttons % 2 == 1) {
-    distance += 40*speed*(lastY - evt.clientY)/client.height;
-    lastY = evt.clientY;
+  if (moveY) {
+    distance += 40*speed*(lastY - clientY)/client.height;
+    lastY = clientY;
   }
   moveCar();
+}
+
+function onMouseMove(evt) {
+  handleMove(evt.clientX, evt.clientY, (evt.buttons % 2 == 1));
 }
 
 function onMouseDown(evt) {
@@ -266,6 +270,55 @@ function onKeyDown(evt) {
   }
 }
 
+function onWheel(evt) {
+  const BASE_SPEED = -6;
+  const FACTOR = [1, 1/40, 1/800];
+  evt.preventDefault();
+  distance += evt.deltaY * BASE_SPEED * FACTOR[evt.deltaMode];
+  moveCar();
+}
+
 document.addEventListener('mousemove', onMouseMove);
 document.addEventListener('mousedown', onMouseDown);
 document.addEventListener('keydown', onKeyDown);
+document.addEventListener('wheel', onWheel);
+
+function onTouchStart(evt) {
+  if (evt.touches.length === 1) {
+    evt.preventDefault();
+  }
+}
+
+function onTouchMove(evt) {
+  console.log(evt);
+  if (evt.touches.length === 1) {
+    evt.preventDefault();
+    handleMove(evt.touches[0].clientX, evt.touches[0].clientY, false);
+  }
+}
+
+function onTouchCancel(evt) {
+  if (evt.touches.length === 1) {
+    evt.preventDefault();
+  }
+}
+
+function onTouchEnd(evt) {
+  console.log(evt);
+  if (evt.changedTouches.length === 1) {
+    evt.preventDefault();
+    let client = document.documentElement.getBoundingClientRect();
+    if (evt.changedTouches[0].clientY < client.height / 2) {
+      distance = 5 * h;
+    }
+    else {
+      distance = -5 * h;
+    }
+    moveCar();
+  }
+}
+
+document.addEventListener('touchstart', onTouchStart);
+document.addEventListener('touchmove', onTouchMove);
+document.addEventListener('touchcancel', onTouchCancel);
+document.addEventListener('touchend', onTouchEnd);
